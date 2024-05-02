@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     Vector3 spawnAreaSize;
 
     [Header("Product references")]
-    [SerializeField] int numberOfItems = 4;
+    [SerializeField] int numberOfItems = 10;
 
     [Header("Main menu")]
     [SerializeField] public GameObject mainMenuCanvas;
@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float _duration = 10.0f;
     [SerializeField] public GameObject blueBox;
     [SerializeField] public GameObject redBox;
+    [SerializeField] public GameObject greenBox;
 
     [Header("Endgame")]
     [SerializeField] public GameObject scoreCanvas;
@@ -55,6 +56,8 @@ public class GameManager : Singleton<GameManager>
         // blue product factory
         FactoryProductBlue factoryProductBlue = this.GetComponent<FactoryProductBlue>();
         FactoryProductRed factoryProductRed = this.GetComponent<FactoryProductRed>();
+        FactoryProductGreen factoryProducGreen = this.GetComponent<FactoryProductGreen>();
+
 
         // create n products
         for (int i = 0; i < numberOfItems; i++)
@@ -63,16 +66,24 @@ public class GameManager : Singleton<GameManager>
 
             IProduct item;
 
-            int randomFactory = Random.Range(1, 3);
+            int randomFactory = Random.Range(1, 4);
             if (randomFactory == 1)
             {
                 item = factoryProductBlue.GetProduct(randomPos);
             }
             else
             {
-                item = factoryProductRed.GetProduct(randomPos);
+                if (randomFactory==2){
+                    item = factoryProducGreen.GetProduct(randomPos);
+                }
+                else{
+                    item = factoryProductRed.GetProduct(randomPos);
+                }
+                
             }
+            Debug.Log(i);
         }
+        
     }
 
     private Vector3 GetRandomPointInArea()
@@ -105,10 +116,23 @@ public class GameManager : Singleton<GameManager>
             Destroy(product.gameObject);
         }
 
+        // Encuentra todos los GameObjects en la escena con el componente "ProductGreen"
+        ProductoGreen[] productsGreen = FindObjectsOfType<ProductoGreen>();
+
+        // Itera sobre cada GameObject encontrado
+        foreach (ProductoGreen product in productsGreen)
+        {
+            // Haz algo con cada GameObject encontrado
+            Destroy(product.gameObject);
+        }
+
         // Reinicio las variables de cada caja
         BoxCounter boxCounterBlue = blueBox.GetComponentInChildren<BoxCounter>();
         boxCounterBlue.RestartScore();
         BoxCounter boxCounterRed = redBox.GetComponentInChildren<BoxCounter>();
         boxCounterRed.RestartScore();
+        
+        // Se reinicia el contador de la cada verde
+        greenBox.GetComponent<BoxCounter>().RestartScore();
     }
 }
