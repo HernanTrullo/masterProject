@@ -17,6 +17,7 @@ public class GameplayState : IState
         elapsedTime = 0f;
         gameManager.gameplayCanvas.SetActive(true);
         gameManager.GenerateInteractables();
+        gameManager.timeTotalTxt.text = "Tiempo Total: " + string.Format("{0:00}:{1:00}", 0, gameManager._duration);
     }
 
     public void Update()
@@ -36,6 +37,8 @@ public class GameplayState : IState
         {
             gameManager.stateMachine.TransitionTo(gameManager.stateMachine.showScoreState);
         }
+
+
     }
 
     public void Exit()

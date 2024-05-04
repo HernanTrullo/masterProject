@@ -163,7 +163,9 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.master_vr_class
+    Standalone: com.DefaultCompany.master-vr-class
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -857,11 +859,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 3d94990f-6182-4b0d-ba88-8ee9cde97fe8
+  cloudProjectId: 09bd7b0b-a5ee-4f6d-b580-4dde32a23ed8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: master_vr_class
-  organizationId: dmankey90
+  projectName: RobSof
+  organizationId: trullodario
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

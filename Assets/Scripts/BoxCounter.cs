@@ -6,7 +6,11 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class BoxCounter : Box
 {
+
     [SerializeField] String ColorBox = "White";
+    [SerializeField] private AudioClip okSound;
+    [SerializeField] private AudioClip noSound;
+
     private int score = 0;
     private int totalItems = 0;
     public event Action CounterChange;
@@ -16,7 +20,11 @@ public class BoxCounter : Box
         ItemColor itemColor = other.GetComponent<ItemColor>();
         if(itemColor.color == ColorBox)
         {
+            Sound_box(okSound);
             score++;
+        }
+        else{
+            Sound_box(noSound);
         }
         totalItems++;
         CounterChange?.Invoke();
@@ -49,4 +57,11 @@ public class BoxCounter : Box
         totalItems = 0;
         CounterChange?.Invoke();
     }
+
+    void Sound_box (AudioClip audioClip){
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.PlayOneShot(audioClip);
+    }
+    
 }

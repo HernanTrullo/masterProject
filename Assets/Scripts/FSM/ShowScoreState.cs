@@ -15,6 +15,13 @@ public class ShowScoreState : IState
 
     public void Enter()
     {
+        int scoreBoxGreen =  gameManager.greenBox.GetComponentInChildren<BoxCounter>().GetScore();
+        int scoreBoxRed = gameManager.redBox.GetComponentInChildren<BoxCounter>().GetScore();
+        int scoreBoxBlue = gameManager.blueBox.GetComponentInChildren<BoxCounter>().GetScore();
+
+        float puntaje = scoreBoxBlue * 1.2f + scoreBoxGreen * 1.5f + scoreBoxRed;
+
+        gameManager.scoreValue.text = puntaje.ToString("F1");
         gameManager.scoreCanvas.SetActive(true);
     }
 

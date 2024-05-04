@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     Vector3 spawnAreaSize;
 
     [Header("Product references")]
-    [SerializeField] int numberOfItems = 10;
+    [SerializeField] public int numberOfItems = 10;
 
     [Header("Main menu")]
     [SerializeField] public GameObject mainMenuCanvas;
@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Gameplay")]
     [SerializeField] public GameObject gameplayCanvas;
     [SerializeField] public TMP_Text timeTxt;
+    [SerializeField] public TMP_Text timeTotalTxt;
     [SerializeField] public float _duration = 10.0f;
     [SerializeField] public GameObject blueBox;
     [SerializeField] public GameObject redBox;
@@ -31,7 +32,14 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Endgame")]
     [SerializeField] public GameObject scoreCanvas;
+    [SerializeField] public TMP_Text scoreValue;
     [SerializeField] public Button saveBtn;
+    [SerializeField] public Button exitBtn;
+
+    [Header("Endgame Panel Question")]
+    [SerializeField] public GameObject exitCanvasQuestion;
+    [SerializeField] public Button exitBtnPanelQuestion;
+    [SerializeField] public Button cancelBtnPanelQuestion;
 
     public StateMachine stateMachine;
 
@@ -40,6 +48,10 @@ public class GameManager : Singleton<GameManager>
     {
         stateMachine = new(this);
         stateMachine.Initialize(stateMachine.mainMenuState);
+
+        // Inicialización de las variables de control
+        numberOfItems = Random.Range(5, 9);
+        _duration = Random.Range(15, 25);
     }
 
     private void Update()
@@ -58,7 +70,7 @@ public class GameManager : Singleton<GameManager>
         FactoryProductRed factoryProductRed = this.GetComponent<FactoryProductRed>();
         FactoryProductGreen factoryProducGreen = this.GetComponent<FactoryProductGreen>();
 
-
+        
         // create n products
         for (int i = 0; i < numberOfItems; i++)
         {
@@ -81,7 +93,7 @@ public class GameManager : Singleton<GameManager>
                 }
                 
             }
-            Debug.Log(i);
+
         }
         
     }
@@ -127,12 +139,10 @@ public class GameManager : Singleton<GameManager>
         }
 
         // Reinicio las variables de cada caja
-        BoxCounter boxCounterBlue = blueBox.GetComponentInChildren<BoxCounter>();
-        boxCounterBlue.RestartScore();
-        BoxCounter boxCounterRed = redBox.GetComponentInChildren<BoxCounter>();
-        boxCounterRed.RestartScore();
+        blueBox.GetComponentInChildren<BoxCounter>().RestartScore();
+        redBox.GetComponentInChildren<BoxCounter>().RestartScore();
         
         // Se reinicia el contador de la cada verde
-        greenBox.GetComponent<BoxCounter>().RestartScore();
+        greenBox.GetComponentInChildren<BoxCounter>().RestartScore();
     }
 }

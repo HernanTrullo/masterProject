@@ -22,6 +22,7 @@ public class CloudSave : Singleton<CloudSave>
         public int scoreBlue;
         public int scoreRed;
         public int scoreGreen;
+        public float scoreTotal;
     }
 
     async void Start()
@@ -78,8 +79,12 @@ public class CloudSave : Singleton<CloudSave>
         performance.scoreRed = redBox.GetComponentInChildren<BoxCounter>().GetScore();
         performance.scoreGreen = greenBox.GetComponentInChildren<BoxCounter>().GetScore();
 
+        performance.scoreTotal = performance.scoreBlue * 1.2f + performance.scoreGreen * 1.5f + performance.scoreRed;
+
         var data = new Dictionary<string, object> { { "Perfomance", performance } };
         await CloudSaveService.Instance.Data.Player.SaveAsync(data);
         Debug.Log("Exito!");
+
+        
     }
 }

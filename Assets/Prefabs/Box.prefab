@@ -802,6 +802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ColorBox: Blue
+  okSound: {fileID: 8300000, guid: 033398469c43e6f47b2237dd071786bf, type: 3}
+  noSound: {fileID: 8300000, guid: bb20c432fdb0d304fa1338406d709e2b, type: 3}
 --- !u!1 &7494094713605880932
 GameObject:
   m_ObjectHideFlags: 0

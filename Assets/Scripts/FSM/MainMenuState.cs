@@ -11,6 +11,7 @@ public class MainMenuState : IState
     {
         this.gameManager = gameManager;
         gameManager.startBtn.onClick.AddListener(BeginGame);
+        gameManager.exitBtn.onClick.AddListener(ExitGame);
     }
 
     public void Enter()
@@ -25,9 +26,11 @@ public class MainMenuState : IState
 
     }
 
-    private void BeginGame()
-    {
+    private void BeginGame(){
         gameManager.stateMachine.TransitionTo(gameManager.stateMachine.gameplayState);
+    }
+    private void ExitGame(){
+        gameManager.stateMachine.TransitionTo(gameManager.stateMachine.exitGameState);
     }
 
     public void Exit()
